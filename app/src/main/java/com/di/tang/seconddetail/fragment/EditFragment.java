@@ -3,7 +3,11 @@ package com.di.tang.seconddetail.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +30,7 @@ public class EditFragment extends Fragment{
     private EditText mEditText;
     private ViewPager mViewPage;
     private DetailInformation mDetailInformation;
+    private FragmentManager mFragmentManager;
 
     @Override
     public void onCreate(Bundle saveInstanceBundle){
@@ -40,8 +45,47 @@ public class EditFragment extends Fragment{
         mEditFragmentChange.EditChangeButton();
         mEditText = (EditText)view.findViewById(R.id.second_detail_edit_input);
         mViewPage = (ViewPager)view.findViewById(R.id.second_detail_deit_viewpager);
+        mFragmentManager = getActivity().getSupportFragmentManager();
         mEditText.setText(mDetailInformation.getAddress());
+        mEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().equals("")){
+                    mDetailInformation.setAddress("");
+                }else{
+                    mDetailInformation.setAddress(editable.toString());
+                }
+
+            }
+        });
+        mViewPage.setAdapter(new FragmentStatePagerAdapter(mFragmentManager) {
+            @Override
+            public Fragment getItem(int position) {
+
+                if(position == 0){
+                    return new IsHasFragment();
+                }else if(position == 1){
+                    return new IsMatingFragment();
+                }else{
+                    return new IsPregnantFragment();
+                }
+            }
+
+            @Override
+            public int getCount() {
+                return 3;
+            }
+        });
         return view;
     }
 

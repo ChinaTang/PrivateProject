@@ -1,5 +1,6 @@
 package com.di.tang.seconddetail.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.di.tang.constant.ConstantInformation;
 import com.di.tang.data.DataList;
 import com.di.tang.data.DetailInformation;
+import com.di.tang.data.FindDataInterface;
 import com.di.tang.privateproject.R;
 import com.di.tang.seconddetail.fragment.DisplayFragment;
 import com.di.tang.seconddetail.fragment.EditFragment;
@@ -20,7 +22,8 @@ import com.di.tang.seconddetail.fragment.EditFragment;
  * Created by tangdi on 2016/8/3.
  */
 public class DetailActivity extends AppCompatActivity
-        implements EditFragment.EditFragmentChange, DisplayFragment.DisplayFragmentChange{
+        implements EditFragment.EditFragmentChange, DisplayFragment.DisplayFragmentChange,
+        FindDataInterface<DetailInformation>{
     private ImageButton mBnForRetur, mBnForEdit;
     private TextView mTextViewForTitle;
     Fragment mFragment, mEditFragment;
@@ -71,5 +74,10 @@ public class DetailActivity extends AppCompatActivity
     @Override
     public void EditChangeButton() {
         //change Activity Title SaveButton to EditButton
+    }
+
+    @Override
+    public DetailInformation getData() {
+        return mDetailInformation;
     }
 }

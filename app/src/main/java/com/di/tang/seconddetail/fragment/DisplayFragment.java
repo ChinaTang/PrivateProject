@@ -108,6 +108,7 @@ public class DisplayFragment extends Fragment {
     public void onAttach(Context context){
         super.onAttach(context);
         mActivity = (Activity)context;
+        mDisplayFragmentChange = (DisplayFragmentChange)context;
         mDisplayFragmentChange.DisplayChangeButton();
     }
 

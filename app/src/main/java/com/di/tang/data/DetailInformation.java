@@ -162,4 +162,8 @@ public class DetailInformation {
     public void setmDetailLPinformation(ArrayList<DetailLPinformation> mDetailLPinformation) {
         this.mDetailLPinformation = mDetailLPinformation;
     }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
