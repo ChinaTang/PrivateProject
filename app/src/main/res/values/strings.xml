@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">PrivateProject</string>
+    <string name="detail_item_address">位置信息：</string>
+
+    <string name="detail_item_number">总数：</string>
+    <string name="detail_item_prompt">lp burn days:</string>
+
+    <string name="detail_item_mating">matingTimes:</string>
+    <string name="detail_item_mating_days">last mating days:</string>
+
+    <string name="detail_item_pregnant">pregnant:</string>
+    <string name="detail_item_pregnant_days">pergnant days:</string>
+
+    <string name="waring">空空如也\n点击添加明细</string>
+
+    <!--              默认               -->
+    <string name="detail_item1"><font color="red">无数据</font></string>
+    <string name="detail_item2"><font color="red">无数据</font></string>
+
+    <!--          AddressFragmentdialog            -->
+    <string name="address_dialog_title">输入唯一标识</string>
+    <string name="address_dialog_ensure">确认</string>
+
+    <string name="test_text">测试文字</string>
+    <string name="test_text_long">测试文字长123456789123</string>
+    <string name="data_empty">无数据</string>
+
+    <!--detail_text-->
+    <string name="ishas_true_time">生下</string>
+    <string name="ishas_true_number">头lp,将在</string>
+    <string name="ishas_true_nomilk_time">天后nm</string>
+
+    <string name="ismating_true_time">..</string>
+    <string name="ismating_true_befor">..</string>
+    <string name="ismating_true_times">..</string>
+
+    <string name="ispregnant_true_time">..</string>
+    <string name="isPregnant_true_forecast">..</string>
+    <string name="isPregnant_true_number">..</string>
+
+    <string name="no_millk">MILK</string>
+    <string name="address">address</string>
+</resources>
