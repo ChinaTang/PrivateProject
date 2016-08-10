@@ -46,4 +46,12 @@
     <string name="ishas">ishas</string>
     <string name="ismating">isMating</string>
     <string name="ispregnant">isPregnant</string>
+
+    <string name="nomilkDay">NOMilkDay</string>
+    <string name="castrateDay">CastrateDay</string>
+    <string name="nocastrate">NOCastrate</string>
+
+    <string name="nomilkdetail">NOMILK，</string>
+    <string name="castratedetail">完成CASTRATE</string>
+    <string name="nocastratedetail">未完成CASTRATE</string>
 </resources>

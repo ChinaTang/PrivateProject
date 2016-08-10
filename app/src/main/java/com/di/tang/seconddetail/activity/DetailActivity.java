@@ -14,6 +14,7 @@ import com.di.tang.constant.ConstantInformation;
 import com.di.tang.data.DataList;
 import com.di.tang.data.DetailInformation;
 import com.di.tang.data.FindDataInterface;
+import com.di.tang.firstboundary.fragment.IndivListLPFragment;
 import com.di.tang.privateproject.R;
 import com.di.tang.seconddetail.fragment.DisplayFragment;
 import com.di.tang.seconddetail.fragment.EditFragment;
@@ -32,6 +33,7 @@ public class DetailActivity extends AppCompatActivity
     private static final String SHOW_FRAGMENT = "showfragment";
     private static final String EDIT_FRAGMENT = "deitfragment";
     public static final String INFORMATION = "information";
+    public static final String ISLP = "isLP";
     @Override
     protected void onCreate(Bundle saveInstanceBundle){
         super.onCreate(saveInstanceBundle);
@@ -47,10 +49,14 @@ public class DetailActivity extends AppCompatActivity
         if(mFragment == null){
             Bundle bundle = new Bundle();
             bundle.putInt(INFORMATION, getIntent().getIntExtra(ConstantInformation.DATA_UUID, 0));
-            mFragment = DisplayFragment.getInstance(bundle);
-            mFragmentManager.beginTransaction()
-                    .add(R.id.seconde_detail_list_item_fragment, mFragment, SHOW_FRAGMENT)
-                    .commit();
+            if(getIntent().getBooleanExtra(IndivListLPFragment.ISLP, false)){
+
+            }else{
+                mFragment = DisplayFragment.getInstance(bundle);
+                mFragmentManager.beginTransaction()
+                        .add(R.id.seconde_detail_list_item_fragment, mFragment, SHOW_FRAGMENT)
+                        .commit();
+            }
         }
         mBnForEdit.setOnClickListener(new View.OnClickListener() {
             @Override

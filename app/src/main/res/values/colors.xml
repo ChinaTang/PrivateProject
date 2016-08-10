@@ -6,4 +6,5 @@
     <color name="colorblack">#000000</color>
     <color name="colorwrite">#FFFFFF</color>
     <color name="transparent">#00000000</color>
+    <color name="red">#CC0000</color>
 </resources>

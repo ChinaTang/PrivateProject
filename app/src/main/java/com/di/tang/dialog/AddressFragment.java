@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.di.tang.data.DataList;
 import com.di.tang.data.DetailInformation;
+import com.di.tang.data.DetailLPinformation;
 import com.di.tang.privateproject.R;
 
 /**
@@ -23,12 +24,16 @@ public class AddressFragment extends DialogFragment{
     public interface NotifyChange{
         void notifyChange();
     }
+    public static final String _INFORTMATION = "islp";
     private NotifyChange notifyChange;
     private EditText mAddress;
     private Button bn01;
     private DetailInformation mDetailInformation;
+    private DetailLPinformation mDetailLPinformation;
     @Override
     public Dialog onCreateDialog(Bundle saveInstanceBundle){
+        Bundle bundle = getArguments();
+        final boolean isLp = bundle.getBoolean(_INFORTMATION);
         View v = getActivity().getLayoutInflater().inflate(R.layout.address_dialog, null);
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.address_dialog_title)
@@ -39,9 +44,16 @@ public class AddressFragment extends DialogFragment{
         bn01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDetailInformation = new DetailInformation(mAddress.getText().toString());
-                mDetailInformation.setEmpty(true);
-                DataList.getmDetailInformations().add(mDetailInformation);
+                if(isLp){
+                    mDetailLPinformation = new DetailLPinformation();
+                    mDetailLPinformation.setEmpty(true);
+                    mDetailLPinformation.setAddress(mAddress.getText().toString());
+                    DataList.getmDetailLPinformation().add(mDetailLPinformation);
+                }else{
+                    mDetailInformation = new DetailInformation(mAddress.getText().toString());
+                    mDetailInformation.setEmpty(true);
+                    DataList.getmDetailInformations().add(mDetailInformation);
+                }
                 notifyChange.notifyChange();
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
@@ -87,5 +99,11 @@ public class AddressFragment extends DialogFragment{
     public void onDestroy(){
         super.onDestroy();
         notifyChange = null;
+    }
+
+    public static AddressFragment getInstance(Bundle bundle){
+        AddressFragment mAddressFragment = new AddressFragment();
+        mAddressFragment.setArguments(bundle);
+        return mAddressFragment;
     }
 }

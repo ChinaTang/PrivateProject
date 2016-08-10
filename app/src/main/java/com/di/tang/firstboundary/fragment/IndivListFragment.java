@@ -74,7 +74,6 @@ public class IndivListFragment extends ListFragment{
     @Override
     public void onCreate(Bundle saveInstanceBundle){
         super.onCreate(saveInstanceBundle);
-        TimeTool.setNowDate(new Date());
         mToolAdapter = new ToolAdapter<DetailInformation>(mSelfId,
                 DataList.getmDetailInformations(), mView);
         setListAdapter(mToolAdapter);
