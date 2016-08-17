@@ -12,6 +12,7 @@
     <string name="detail_item_pregnant_days">pergnant days:</string>
 
     <string name="waring">空空如也\n点击添加明细</string>
+    <string name="waring_no">此页面无法添加\n将通过内部数据自行完成</string>
 
     <!--              默认               -->
     <string name="detail_item1"><font color="red">无数据</font></string>

@@ -37,8 +37,13 @@ public class WaringFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle saveInstanceState){
         View view = inflater.inflate(R.layout.fragment_warning, parent, false);
-        mFragmentManager = getActivity().getSupportFragmentManager();
         button = (Button)view.findViewById(R.id.fragment_warning_button);
+        if(getArguments().getInt(ConstantInformation.WARING_FLAG) == 1){
+            button.setText(R.string.waring_no);
+            button.setEnabled(false);
+            return view;
+        }
+        mFragmentManager = getActivity().getSupportFragmentManager();
         mAddressFragment = new AddressFragment();
         mBundle = getArguments();
         button.setOnClickListener(new View.OnClickListener(){
@@ -54,14 +59,12 @@ public class WaringFragment extends Fragment {
         return view;
     }
 
-    public static WaringFragment getWaringFragment(Bundle bundle){
-        WaringFragment waringFragment = new WaringFragment();
-        waringFragment.setArguments(bundle);
-        return waringFragment;
-    }
-
-    public static void setFlag(int i){
-        flag = i;
+    public static WaringFragment getInstacne(int key){
+        Bundle bundle = new Bundle();
+        bundle.putInt(ConstantInformation.WARING_FLAG, key);
+        WaringFragment mWaringFragment = new WaringFragment();
+        mWaringFragment.setArguments(bundle);
+        return mWaringFragment;
     }
 
 }

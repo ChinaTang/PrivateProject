@@ -18,6 +18,7 @@ import com.di.tang.firstboundary.fragment.IndivListLPFragment;
 import com.di.tang.privateproject.R;
 import com.di.tang.seconddetail.fragment.DisplayFragment;
 import com.di.tang.seconddetail.fragment.EditFragment;
+import com.di.tang.seconddetail.lpfragment.DisplayLPFragment;
 
 /**
  * Created by tangdi on 2016/8/3.
@@ -49,10 +50,13 @@ public class DetailActivity extends AppCompatActivity
         if(mFragment == null){
             Bundle bundle = new Bundle();
             bundle.putInt(INFORMATION, getIntent().getIntExtra(ConstantInformation.DATA_UUID, 0));
-            if(getIntent().getBooleanExtra(IndivListLPFragment.ISLP, false)){
-
-            }else{
+            if(getIntent().getIntExtra(ConstantInformation.LPORBFLAG, 0) == 0){
                 mFragment = DisplayFragment.getInstance(bundle);
+                mFragmentManager.beginTransaction()
+                        .add(R.id.seconde_detail_list_item_fragment, mFragment, SHOW_FRAGMENT)
+                        .commit();
+            }else{
+                mFragment = DisplayLPFragment.getInstance(bundle);
                 mFragmentManager.beginTransaction()
                         .add(R.id.seconde_detail_list_item_fragment, mFragment, SHOW_FRAGMENT)
                         .commit();

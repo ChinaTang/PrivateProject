@@ -52,5 +52,11 @@ public class DisplayLPFragment extends Fragment {
         return mStringBuilder.toString();
     }
 
+    public static DisplayLPFragment getInstance(Bundle bundle){
+        DisplayLPFragment displayLPFragment = new DisplayLPFragment();
+        displayLPFragment.setArguments(bundle);
+        return displayLPFragment;
+    }
+
 }
 

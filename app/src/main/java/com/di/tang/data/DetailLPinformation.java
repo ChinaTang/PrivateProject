@@ -1,5 +1,10 @@
 package com.di.tang.data;
 
+import com.di.tang.constant.ConstantInformation;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
@@ -8,9 +13,9 @@ import java.util.UUID;
  * Created by tangdi on 2016/8/4.
  */
 public class DetailLPinformation {
+    private UUID uuid;
     private boolean isEmpty = false;
     private boolean isSell = false;
-    private UUID uuid;
     private String Address;
 
     private int number;
@@ -112,5 +117,21 @@ public class DetailLPinformation {
 
     public void setImage(URI image) {
         this.image = image;
+    }
+
+    public JSONObject lpToJSON() throws JSONException{
+        JSONObject packData = new JSONObject();
+        packData.put(ConstantInformation._UUID, uuid.toString());
+        packData.put(ConstantInformation.ISEMPTY, isEmpty);
+        packData.put(ConstantInformation.ISSELL, isSell);
+        packData.put(ConstantInformation.ADDRESS, Address);
+        packData.put(ConstantInformation.NUMBER, number);
+        packData.put(ConstantInformation.NOMILKDAY, noMilkDay.getTime());
+        packData.put(ConstantInformation.SELLNUMBER, sellNumber);
+        packData.put(ConstantInformation.SELLDAY, sellDay.getTime());
+        packData.put(ConstantInformation.ISCASTRATE, isCastrate);
+        packData.put(ConstantInformation.CASTRATEDDAY, castratedDay.getTime());
+        packData.put(ConstantInformation.IMAGEURI, image.toString());
+        return packData;
     }
 }

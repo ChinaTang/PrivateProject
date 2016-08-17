@@ -30,10 +30,16 @@ public class AddressFragment extends DialogFragment{
     private Button bn01;
     private DetailInformation mDetailInformation;
     private DetailLPinformation mDetailLPinformation;
+    private boolean isLp;
     @Override
     public Dialog onCreateDialog(Bundle saveInstanceBundle){
         Bundle bundle = getArguments();
-        final boolean isLp = bundle.getBoolean(_INFORTMATION);
+
+        if(bundle == null){
+            isLp = false;
+        }else{
+            isLp = bundle.getBoolean(_INFORTMATION);
+        }
         View v = getActivity().getLayoutInflater().inflate(R.layout.address_dialog, null);
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.address_dialog_title)

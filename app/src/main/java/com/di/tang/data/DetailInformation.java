@@ -1,5 +1,11 @@
 package com.di.tang.data;
 
+import com.di.tang.constant.ConstantInformation;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,9 +23,6 @@ public class DetailInformation {
 
     /*-------has lp-----------*/
     /*--if ishas is TRUE item should include lp's number and lp was burn days----*/
-    private boolean ishas = false;
-    private int number;
-    private Date hasDate;
     /*------------------*/
 
     /*--------MatingTimes----------*/
@@ -38,7 +41,7 @@ public class DetailInformation {
     /*------------------*/
 
      /*---------In total have lp---------*/
-    private ArrayList<DetailLPinformation> mDetailLPinformation = new ArrayList<DetailLPinformation>();
+    private ArrayList<HaveLp> mDetailLPinformation = new ArrayList<HaveLp>();
 
     public DetailInformation(String address){
         uuid = UUID.randomUUID();
@@ -51,30 +54,6 @@ public class DetailInformation {
 
     public UUID getUuid() {
         return uuid;
-    }
-
-    public boolean ishas() {
-        return ishas;
-    }
-
-    public void setIshas(boolean ishas) {
-        this.ishas = ishas;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public Date getHasDate() {
-        return hasDate;
-    }
-
-    public void setHasDate(Date hasDate) {
-        this.hasDate = hasDate;
     }
 
     public boolean isMating() {
@@ -125,15 +104,6 @@ public class DetailInformation {
         this.pregnantDays = pregnantTimes;
     }
 
-    public boolean isEmpty() {
-        if(ishas || isMating || isPregnant){
-            isEmpty = true;
-        }else{
-            isEmpty = false;
-        }
-        return isEmpty;
-    }
-
     public void setEmpty(boolean empty) {
         isEmpty = empty;
     }
@@ -155,15 +125,39 @@ public class DetailInformation {
         return 0;
     }
 
-    public ArrayList<DetailLPinformation> getmDetailLPinformation() {
+    public ArrayList<HaveLp> getmDetailLPinformation() {
         return mDetailLPinformation;
     }
 
-    public void setmDetailLPinformation(ArrayList<DetailLPinformation> mDetailLPinformation) {
+    public void setmDetailLPinformation(ArrayList<HaveLp> mDetailLPinformation) {
         this.mDetailLPinformation = mDetailLPinformation;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public JSONObject bpToJSON() throws JSONException{
+        JSONObject packData = new JSONObject();
+        packData.put(ConstantInformation._UUID, uuid.toString());
+        packData.put(ConstantInformation.ISEMPTY, isEmpty);
+        packData.put(ConstantInformation.ADDRESS, address);
+        packData.put(ConstantInformation.IMAGEURI, Imageuri.toString());
+        packData.put(ConstantInformation.ISMATING, isMating);
+        packData.put(ConstantInformation.MATINGTIMES, matingTimes);
+        packData.put(ConstantInformation.MATINGDATE, matingDate.getTime());
+        packData.put(ConstantInformation.ISPREGNANT, isPregnant);
+        packData.put(ConstantInformation.PREGNANTDATE, pregnantDate.getTime());
+        packData.put(ConstantInformation.PREGNANTDAYS, pregnantDays);
+        packData.put(ConstantInformation.HAVELPLIST, LptoJSONArray());
+        return packData;
+    }
+
+    private JSONArray LptoJSONArray() throws JSONException{
+        JSONArray array = new JSONArray();
+        for(int i = 0; i < mDetailLPinformation.size(); i++){
+            array.put(mDetailLPinformation.get(i).HaveLpToJSON());
+        }
+        return array;
     }
 }

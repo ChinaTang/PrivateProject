@@ -23,7 +23,6 @@ import com.di.tang.tools.ToolAdapter;
  */
 public class IndivListLPFragment extends ListFragment {
     private ToolAdapter<DetailLPinformation> mToolAdater;
-    public static final String ISLP = "islp";
 
     private ToolAdapter.SelfId mSelfId = new ToolAdapter.SelfId() {
         @Override
@@ -69,7 +68,7 @@ public class IndivListLPFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id){
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         intent.putExtra(ConstantInformation.DATA_UUID, position);
-        intent.putExtra(ISLP, true);
+        intent.putExtra(ConstantInformation.LPORBFLAG, 1);
         getActivity().startActivity(intent);
     }
 

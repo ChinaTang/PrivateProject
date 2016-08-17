@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.di.tang.data.DetailInformation;
 import com.di.tang.data.FindDataInterface;
+import com.di.tang.data.HaveLp;
 import com.di.tang.dialog.DateDialogFragment;
 import com.di.tang.privateproject.R;
 import com.di.tang.tools.TimeTool;
@@ -31,7 +32,7 @@ public class IsHasFragment extends Fragment{
     private EditText mEditText;
     private Button mButton;
     private TextView textView;
-    private DetailInformation mDetailInformation;
+    private HaveLp mDetailInformation;
     private DateDialogFragment mDateDialogFragment;
     public static final int QUEST_DATA = 0;
     @Override
@@ -92,7 +93,7 @@ public class IsHasFragment extends Fragment{
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
-        mDetailInformation = ((FindDataInterface<DetailInformation>)context).getData();
+        mDetailInformation = ((FindDataInterface<HaveLp>)context).getData();
     }
 
     @Override

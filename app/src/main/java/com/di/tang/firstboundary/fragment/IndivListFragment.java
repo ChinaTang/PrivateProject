@@ -84,6 +84,7 @@ public class IndivListFragment extends ListFragment{
     @Override
     public void onListItemClick(ListView l, View v, int position, long id){
         Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra(ConstantInformation.LPORBFLAG, 0);
         intent.putExtra(ConstantInformation.DATA_UUID, position);
         getActivity().startActivity(intent);
     }

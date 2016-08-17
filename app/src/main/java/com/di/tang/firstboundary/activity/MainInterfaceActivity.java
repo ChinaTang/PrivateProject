@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import com.di.tang.data.DataList;
 import com.di.tang.dialog.AddressFragment;
 import com.di.tang.firstboundary.fragment.IndivListFragment;
+import com.di.tang.firstboundary.fragment.IndivListLPFragment;
 import com.di.tang.firstboundary.fragment.WaringFragment;
 import com.di.tang.privateproject.R;
 import com.di.tang.tools.TimeTool;
@@ -24,7 +25,6 @@ import java.util.Date;
 public class MainInterfaceActivity extends FragmentActivity implements
         AddressFragment.NotifyChange{
 
-    private WaringFragment mWaringFragment;
     private ViewPager mViewPage;
     private FragmentManager mFragmentManager;
     private ImageButton top_bn01, top_bn02, bottom_deatil, bottom_mony,
@@ -43,18 +43,26 @@ public class MainInterfaceActivity extends FragmentActivity implements
         bottom_mony = (ImageButton)findViewById(R.id.activity_main_mony);
         bottom_circle = (ImageButton)findViewById(R.id.activity_main_circle);
         bottom_myself = (ImageButton)findViewById(R.id.activity_main_myself);
-        mWaringFragment = new WaringFragment();
         mViewPage = (ViewPager)findViewById(R.id.activity_main_pageview);
         mFragmentManager = getSupportFragmentManager();
 
         mFragmentStatePagerAdapter = new FragmentStatePagerAdapter(mFragmentManager) {
             @Override
             public Fragment getItem(int position) {
-                if(DataList.getmDetailInformations().isEmpty()){
-                    mWaringFragment.setFlag(0);
-                    return mWaringFragment;
+                if(position == 0){
+                    if(DataList.getmDetailInformations().isEmpty()){
+                        return WaringFragment.getInstacne(0);
+                    }else{
+                        return new IndivListFragment();
+                    }
+                }else if(position == 1){
+                    if(DataList.getmDetailLPinformation().isEmpty()){
+                        return WaringFragment.getInstacne(1);
+                    }else{
+                        return new IndivListLPFragment();
+                    }
                 }else{
-                    return new IndivListFragment();
+                    return WaringFragment.getInstacne(1);
                 }
             }
 
@@ -65,7 +73,7 @@ public class MainInterfaceActivity extends FragmentActivity implements
 
             @Override
             public int getCount() {
-                return 1;
+                return 2;
             }
         };
 
