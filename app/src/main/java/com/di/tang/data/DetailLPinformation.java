@@ -16,7 +16,7 @@ public class DetailLPinformation {
     private UUID uuid;
     private boolean isEmpty = false;
     private boolean isSell = false;
-    private String Address;
+    private String Address = "";
 
     private int number;
     private Date noMilkDay;
@@ -126,12 +126,53 @@ public class DetailLPinformation {
         packData.put(ConstantInformation.ISSELL, isSell);
         packData.put(ConstantInformation.ADDRESS, Address);
         packData.put(ConstantInformation.NUMBER, number);
-        packData.put(ConstantInformation.NOMILKDAY, noMilkDay.getTime());
+        if(noMilkDay == null){
+            packData.put(ConstantInformation.NOMILKDAY, 0);
+        }else{
+            packData.put(ConstantInformation.NOMILKDAY, noMilkDay.getTime());
+        }
+
         packData.put(ConstantInformation.SELLNUMBER, sellNumber);
-        packData.put(ConstantInformation.SELLDAY, sellDay.getTime());
+        if(sellDay == null){
+            packData.put(ConstantInformation.SELLDAY, 0);
+        }else{
+            packData.put(ConstantInformation.SELLDAY, sellDay.getTime());
+        }
         packData.put(ConstantInformation.ISCASTRATE, isCastrate);
-        packData.put(ConstantInformation.CASTRATEDDAY, castratedDay.getTime());
-        packData.put(ConstantInformation.IMAGEURI, image.toString());
+        if(castratedDay == null){
+            packData.put(ConstantInformation.CASTRATEDDAY, 0);
+        }else{
+            packData.put(ConstantInformation.CASTRATEDDAY, castratedDay.getTime());
+        }
+        if(image == null){
+            packData.put(ConstantInformation.IMAGEURI, null);
+        }else{
+            packData.put(ConstantInformation.IMAGEURI, image.toString());
+        }
         return packData;
+    }
+
+    public DetailLPinformation(JSONObject jsonObject) throws JSONException{
+        uuid = UUID.fromString(jsonObject.getString(ConstantInformation._UUID));
+        isEmpty = jsonObject.getBoolean(ConstantInformation.ISEMPTY);
+        isSell = jsonObject.getBoolean(ConstantInformation.ISSELL);
+        Address = jsonObject.getString(ConstantInformation.ADDRESS);
+        number = jsonObject.getInt(ConstantInformation.NUMBER);
+        if(jsonObject.getLong(ConstantInformation.NOMILKDAY) != 0){
+            noMilkDay = new Date(jsonObject.getLong(ConstantInformation.NOMILKDAY));
+        }
+        sellNumber = jsonObject.getInt(ConstantInformation.SELLNUMBER);
+        if(jsonObject.getLong(ConstantInformation.SELLDAY) != 0){
+            sellDay = new Date(jsonObject.getLong(ConstantInformation.SELLDAY));
+        }
+        isCastrate = jsonObject.getBoolean(ConstantInformation.ISCASTRATE);
+        if(jsonObject.getLong(ConstantInformation.CASTRATEDDAY) != 0){
+            castratedDay = new Date(jsonObject.getLong(ConstantInformation.CASTRATEDDAY));
+        }
+        if(jsonObject.getString(ConstantInformation.IMAGEURI) == null){
+            image = null;
+        }else{
+            image = URI.create(jsonObject.getString(ConstantInformation.IMAGEURI));
+        }
     }
 }

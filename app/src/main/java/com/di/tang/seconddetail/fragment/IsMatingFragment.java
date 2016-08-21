@@ -14,10 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.di.tang.data.DataList;
 import com.di.tang.data.DetailInformation;
 import com.di.tang.data.FindDataInterface;
 import com.di.tang.dialog.DateDialogFragment;
 import com.di.tang.privateproject.R;
+import com.di.tang.seconddetail.activity.DetailActivity;
 import com.di.tang.tools.TimeTool;
 
 import java.util.Date;
@@ -35,6 +37,8 @@ public class IsMatingFragment extends Fragment {
     @Override
     public void onCreate(Bundle saveInstanceBundle){
         super.onCreate(saveInstanceBundle);
+        mDetailInformation = DataList.getmDetailInformations().
+                get(getArguments().getInt(DetailActivity.INFORMATION));
     }
 
     @Override
@@ -46,7 +50,7 @@ public class IsMatingFragment extends Fragment {
         textView.setText(getActivity().getResources().getText(R.string.ismating));
         mEditText.setText(String.valueOf(mDetailInformation.getMatingTimes()));
 
-        if(mDetailInformation.getHasDate() == null){
+        if(mDetailInformation.getMatingDate() == null){
             mButton.setText(TimeTool.DateToYYMMDD(new Date()));
         }else{
             mButton.setText(TimeTool.DateToYYMMDD(mDetailInformation.getMatingDate()));
@@ -54,7 +58,7 @@ public class IsMatingFragment extends Fragment {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mDetailInformation.getHasDate() == null){
+                if(mDetailInformation.getMatingDate() == null){
                     mDateDialogFragment = DateDialogFragment.getInstance(new Date());
                 }else{
                     mDateDialogFragment = DateDialogFragment.getInstance(mDetailInformation.getMatingDate());
@@ -79,9 +83,9 @@ public class IsMatingFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 if(editable.toString().equals("")){
-                    mDetailInformation.setNumber(0);
+                    mDetailInformation.setMatingTimes(0);
                 }else{
-                    mDetailInformation.setNumber(Integer.valueOf(editable.toString()));
+                    mDetailInformation.setMatingTimes(Integer.valueOf(editable.toString()));
                 }
             }
         });
@@ -104,5 +108,11 @@ public class IsMatingFragment extends Fragment {
             mDetailInformation.setMatingDate(date);
             mButton.setText(TimeTool.DateToYYMMDD(mDetailInformation.getMatingDate()));
         }
+    }
+
+    public static IsMatingFragment getInstance(Bundle bundle){
+        IsMatingFragment isMatingFragment = new IsMatingFragment();
+        isMatingFragment.setArguments(bundle);
+        return isMatingFragment;
     }
 }

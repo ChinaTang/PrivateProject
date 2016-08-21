@@ -31,12 +31,15 @@ public class EditFragment extends Fragment{
     private ViewPager mViewPage;
     private DetailInformation mDetailInformation;
     private FragmentManager mFragmentManager;
+    private Bundle bundle;
 
     @Override
     public void onCreate(Bundle saveInstanceBundle){
         super.onCreate(saveInstanceBundle);
         mDetailInformation = DataList.getmDetailInformations().
                 get(getArguments().getInt(DetailActivity.INFORMATION));
+        bundle = new Bundle();
+        bundle.putInt(DetailActivity.INFORMATION, getArguments().getInt(DetailActivity.INFORMATION));
     }
 
     @Override
@@ -73,11 +76,11 @@ public class EditFragment extends Fragment{
             public Fragment getItem(int position) {
 
                 if(position == 0){
-                    return new IsHasFragment();
+                    return IsHasFragment.getInstance(bundle);
                 }else if(position == 1){
-                    return new IsMatingFragment();
+                    return IsMatingFragment.getInstance(bundle);
                 }else{
-                    return new IsPregnantFragment();
+                    return IsPregnantFragment.getInstance(bundle);
                 }
             }
 

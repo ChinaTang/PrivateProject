@@ -14,6 +14,7 @@ import com.di.tang.constant.ConstantInformation;
 import com.di.tang.data.DataList;
 import com.di.tang.data.DetailInformation;
 import com.di.tang.data.FindDataInterface;
+import com.di.tang.dialog.AddressFragment;
 import com.di.tang.firstboundary.fragment.IndivListLPFragment;
 import com.di.tang.privateproject.R;
 import com.di.tang.seconddetail.fragment.DisplayFragment;
@@ -25,7 +26,7 @@ import com.di.tang.seconddetail.lpfragment.DisplayLPFragment;
  */
 public class DetailActivity extends AppCompatActivity
         implements EditFragment.EditFragmentChange, DisplayFragment.DisplayFragmentChange,
-        FindDataInterface<DetailInformation>{
+        FindDataInterface<DetailInformation>, AddressFragment.NotifyChange{
     private ImageButton mBnForRetur, mBnForEdit;
     private TextView mTextViewForTitle;
     Fragment mFragment, mEditFragment;
@@ -89,5 +90,10 @@ public class DetailActivity extends AppCompatActivity
     @Override
     public DetailInformation getData() {
         return mDetailInformation;
+    }
+
+    @Override
+    public void notifyChange() {
+        //TODO
     }
 }

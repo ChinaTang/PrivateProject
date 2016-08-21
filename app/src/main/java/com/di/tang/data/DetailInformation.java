@@ -19,7 +19,7 @@ public class DetailInformation {
     private UUID uuid;
     private boolean isEmpty = false;
     private String address;
-    private URI Imageuri = null;
+    private URI Imageuri;
 
     /*-------has lp-----------*/
     /*--if ishas is TRUE item should include lp's number and lp was burn days----*/
@@ -41,6 +41,7 @@ public class DetailInformation {
     /*------------------*/
 
      /*---------In total have lp---------*/
+    private boolean isHave = false;
     private ArrayList<HaveLp> mDetailLPinformation = new ArrayList<HaveLp>();
 
     public DetailInformation(String address){
@@ -120,9 +121,16 @@ public class DetailInformation {
         this.uuid = uuid;
     }
 
-
     public int NoMillkTime(){
         return 0;
+    }
+
+    public boolean isHave() {
+        return isHave;
+    }
+
+    public void setHave(boolean have) {
+        isHave = have;
     }
 
     public ArrayList<HaveLp> getmDetailLPinformation() {
@@ -142,12 +150,24 @@ public class DetailInformation {
         packData.put(ConstantInformation._UUID, uuid.toString());
         packData.put(ConstantInformation.ISEMPTY, isEmpty);
         packData.put(ConstantInformation.ADDRESS, address);
-        packData.put(ConstantInformation.IMAGEURI, Imageuri.toString());
+        if(Imageuri == null){
+            packData.put(ConstantInformation.IMAGEURI, null);
+        }else{
+            packData.put(ConstantInformation.IMAGEURI, Imageuri.toString());
+        }
         packData.put(ConstantInformation.ISMATING, isMating);
         packData.put(ConstantInformation.MATINGTIMES, matingTimes);
-        packData.put(ConstantInformation.MATINGDATE, matingDate.getTime());
+        if(matingDate == null){
+            packData.put(ConstantInformation.MATINGDATE, 0);
+        }else{
+            packData.put(ConstantInformation.MATINGDATE, matingDate.getTime());
+        }
         packData.put(ConstantInformation.ISPREGNANT, isPregnant);
-        packData.put(ConstantInformation.PREGNANTDATE, pregnantDate.getTime());
+        if(pregnantDate == null){
+            packData.put(ConstantInformation.PREGNANTDATE, 0);
+        }else{
+            packData.put(ConstantInformation.PREGNANTDATE, pregnantDate.getTime());
+        }
         packData.put(ConstantInformation.PREGNANTDAYS, pregnantDays);
         packData.put(ConstantInformation.HAVELPLIST, LptoJSONArray());
         return packData;
@@ -159,5 +179,38 @@ public class DetailInformation {
             array.put(mDetailLPinformation.get(i).HaveLpToJSON());
         }
         return array;
+    }
+
+    public boolean IsHave(){
+        return isHave;
+    }
+
+    public void setIsHave(boolean isHave){
+        this.isHave = isHave;
+    }
+
+    public DetailInformation(JSONObject jsonObject)throws JSONException{
+        uuid = UUID.fromString(jsonObject.getString(ConstantInformation._UUID));
+        isEmpty = jsonObject.getBoolean(ConstantInformation.ISEMPTY);
+        address = jsonObject.getString(ConstantInformation.ADDRESS);
+        Imageuri = URI.create(jsonObject.getString(ConstantInformation.IMAGEURI));
+        isMating = jsonObject.getBoolean(ConstantInformation.ISMATING);
+        matingTimes = jsonObject.getInt(ConstantInformation.MATINGTIMES);
+        if(jsonObject.getLong(ConstantInformation.MATINGDATE) != 0){
+            matingDate = new Date(jsonObject.getLong(ConstantInformation.MATINGDATE));
+        }
+        isPregnant = jsonObject.getBoolean(ConstantInformation.ISPREGNANT);
+        if(jsonObject.getLong(ConstantInformation.PREGNANTDATE) != 0){
+            pregnantDate = new Date(jsonObject.getLong(ConstantInformation.PREGNANTDATE));
+        }
+        pregnantDays = jsonObject.getInt(ConstantInformation.PREGNANTDAYS);
+        JSONToHaveLp(jsonObject.getJSONArray(ConstantInformation.HAVELPLIST));
+
+    }
+
+    private void JSONToHaveLp(JSONArray jsonArray) throws JSONException{
+        for(int i = 0; i < jsonArray.length(); i++){
+            mDetailLPinformation.add(new HaveLp(jsonArray.getJSONObject(i)));
+        }
     }
 }

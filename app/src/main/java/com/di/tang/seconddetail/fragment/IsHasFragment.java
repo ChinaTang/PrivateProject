@@ -14,11 +14,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.di.tang.data.DataList;
 import com.di.tang.data.DetailInformation;
+import com.di.tang.data.DetailLPinformation;
 import com.di.tang.data.FindDataInterface;
 import com.di.tang.data.HaveLp;
 import com.di.tang.dialog.DateDialogFragment;
 import com.di.tang.privateproject.R;
+import com.di.tang.seconddetail.activity.DetailActivity;
 import com.di.tang.tools.TimeTool;
 
 import org.w3c.dom.Text;
@@ -32,12 +35,21 @@ public class IsHasFragment extends Fragment{
     private EditText mEditText;
     private Button mButton;
     private TextView textView;
+    private DetailInformation detailInformation;
     private HaveLp mDetailInformation;
     private DateDialogFragment mDateDialogFragment;
     public static final int QUEST_DATA = 0;
     @Override
     public void onCreate(Bundle saveInstanceBundle){
         super.onCreate(saveInstanceBundle);
+        detailInformation = DataList.getmDetailInformations().
+                get(getArguments().getInt(DetailActivity.INFORMATION));
+        if(detailInformation.getmDetailLPinformation().size() == 0){
+            mDetailInformation = new HaveLp();
+        }else{
+            mDetailInformation = detailInformation.getmDetailLPinformation().
+                    get(detailInformation.getmDetailLPinformation().size() - 1);
+        }
     }
 
     @Override
@@ -93,7 +105,6 @@ public class IsHasFragment extends Fragment{
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
-        mDetailInformation = ((FindDataInterface<HaveLp>)context).getData();
     }
 
     @Override
@@ -106,5 +117,11 @@ public class IsHasFragment extends Fragment{
             mDetailInformation.setHasDate(date);
             mButton.setText(TimeTool.DateToYYMMDD(mDetailInformation.getHasDate()));
         }
+    }
+
+    public static IsHasFragment getInstance(Bundle bundle){
+        IsHasFragment isHasFragment = new IsHasFragment();
+        isHasFragment.setArguments(bundle);
+        return isHasFragment;
     }
 }

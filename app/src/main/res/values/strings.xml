@@ -3,13 +3,13 @@
     <string name="detail_item_address">位置信息：</string>
 
     <string name="detail_item_number">总数：</string>
-    <string name="detail_item_prompt">lp burn days:</string>
+    <string name="detail_item_prompt">小猪出生日期:</string>
 
-    <string name="detail_item_mating">matingTimes:</string>
-    <string name="detail_item_mating_days">last mating days:</string>
+    <string name="detail_item_mating">交配次数:</string>
+    <string name="detail_item_mating_days">最后一次交配时间:</string>
 
-    <string name="detail_item_pregnant">pregnant:</string>
-    <string name="detail_item_pregnant_days">pergnant days:</string>
+    <string name="detail_item_pregnant">怀孕:</string>
+    <string name="detail_item_pregnant_days">怀孕天数:</string>
 
     <string name="waring">空空如也\n点击添加明细</string>
     <string name="waring_no">此页面无法添加\n将通过内部数据自行完成</string>
@@ -28,8 +28,8 @@
 
     <!--detail_text-->
     <string name="ishas_true_time">生下</string>
-    <string name="ishas_true_number">头lp,将在</string>
-    <string name="ishas_true_nomilk_time">天后nm</string>
+    <string name="ishas_true_number">头小猪,将在</string>
+    <string name="ishas_true_nomilk_time">天后断奶</string>
 
     <string name="ismating_true_time">..</string>
     <string name="ismating_true_befor">..</string>
@@ -39,20 +39,20 @@
     <string name="isPregnant_true_forecast">..</string>
     <string name="isPregnant_true_number">..</string>
 
-    <string name="no_millk">MILK</string>
-    <string name="address">address</string>
+    <string name="no_millk">断奶</string>
+    <string name="address">有效位置</string>
 
-    <string name="number_hint">inputer number</string>
+    <string name="number_hint">输入数量</string>
 
-    <string name="ishas">ishas</string>
-    <string name="ismating">isMating</string>
-    <string name="ispregnant">isPregnant</string>
+    <string name="ishas">哺乳中</string>
+    <string name="ismating">交配中</string>
+    <string name="ispregnant">怀孕中</string>
 
-    <string name="nomilkDay">NOMilkDay</string>
-    <string name="castrateDay">CastrateDay</string>
-    <string name="nocastrate">NOCastrate</string>
+    <string name="nomilkDay">断奶日期</string>
+    <string name="castrateDay">阉割日期</string>
+    <string name="nocastrate">未阉割</string>
 
-    <string name="nomilkdetail">NOMILK，</string>
-    <string name="castratedetail">完成CASTRATE</string>
-    <string name="nocastratedetail">未完成CASTRATE</string>
+    <string name="nomilkdetail">断奶，</string>
+    <string name="castratedetail">完成阉割</string>
+    <string name="nocastratedetail">未完成阉割</string>
 </resources>

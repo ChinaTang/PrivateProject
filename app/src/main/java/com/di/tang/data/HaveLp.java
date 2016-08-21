@@ -13,16 +13,8 @@ import java.util.Date;
  */
 public class HaveLp {
 
-    private boolean ishas = false;
     private int number;
     private Date hasDate;
-    public boolean ishas() {
-        return ishas;
-    }
-
-    public void setIshas(boolean ishas) {
-        this.ishas = ishas;
-    }
 
     public int getNumber() {
         return number;
@@ -42,9 +34,21 @@ public class HaveLp {
 
     public JSONObject HaveLpToJSON() throws JSONException{
         JSONObject packData = new JSONObject();
-        packData.put(ConstantInformation.ISHAS, ishas);
         packData.put(ConstantInformation.NUMBER, number);
-        packData.put(ConstantInformation.HASDATE, hasDate.getTime());
+        if(hasDate == null){
+            packData.put(ConstantInformation.HASDATE, 0);
+        }else{
+            packData.put(ConstantInformation.HASDATE, hasDate.getTime());
+        }
         return packData;
     }
+
+    public HaveLp(JSONObject jsonObject)throws JSONException{
+        number = jsonObject.getInt(ConstantInformation.NUMBER);
+        if(jsonObject.getLong(ConstantInformation.HASDATE) != 0){
+            hasDate = new Date(jsonObject.getLong(ConstantInformation.HASDATE));
+        }
+    }
+
+    public HaveLp(){}
 }

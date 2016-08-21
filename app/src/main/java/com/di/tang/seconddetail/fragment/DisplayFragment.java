@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 import com.di.tang.constant.ConstantInformation;
 import com.di.tang.data.DataList;
 import com.di.tang.data.DetailInformation;
+import com.di.tang.data.DetailLPinformation;
+import com.di.tang.data.HaveLp;
+import com.di.tang.dialog.AddressFragment;
 import com.di.tang.privateproject.R;
 import com.di.tang.seconddetail.activity.DetailActivity;
 import com.di.tang.tools.TimeTool;
@@ -25,7 +29,12 @@ import java.util.Date;
 /**
  * Created by tangdi on 2016/8/4.
  */
-public class DisplayFragment extends Fragment {
+public class DisplayFragment extends Fragment implements AddressFragment.IsNoMilk{
+
+    @Override
+    public void setIsHave() {
+        mDetailInformation.setIsHave(false);
+    }
 
     public interface DisplayFragmentChange{
         public void DisplayChangeButton();
@@ -39,6 +48,8 @@ public class DisplayFragment extends Fragment {
     private  StringBuilder mStringBuilder;
     private Activity mActivity;
     private Button mNoMillkBn;
+    private FragmentManager fm;
+    private static final int QUEST_CODE = 0;
     @Override
     public void onCreate(Bundle saveInstanceBundle){
         super.onCreate(saveInstanceBundle);
@@ -46,6 +57,8 @@ public class DisplayFragment extends Fragment {
 
         mDetailInformation = DataList.getmDetailInformations().
                 get(getArguments().getInt(DetailActivity.INFORMATION));
+
+        fm = getActivity().getSupportFragmentManager();
     }
 
     @Override
@@ -57,23 +70,30 @@ public class DisplayFragment extends Fragment {
         mNoMillkBn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(AddressFragment._INFORTMATION, true);
+                AddressFragment addressFragment = AddressFragment.getInstance(bundle);
+                addressFragment.setTargetFragment(DisplayFragment.this, QUEST_CODE);
+                addressFragment.show(fm, ConstantInformation.ADDRESS_DIALOG);
             }
         });
         mTextView.setText(TextShow(mStringBuilder));
+
         //TODO imageView
         return view;
     }
 
     private String TextShow(StringBuilder mStringBuilder){
         mStringBuilder.delete(0, mStringBuilder.length());
-        if(mDetailInformation.ishas()){
-            mStringBuilder.append(TimeTool.DateToYYMMDD(mDetailInformation.getHasDate()))
+        if(mDetailInformation.isHave()){
+            HaveLp haveLp = mDetailInformation.getmDetailLPinformation().
+                    get(mDetailInformation.getmDetailLPinformation().size() - 1);
+            mStringBuilder.append(TimeTool.DateToYYMMDD(haveLp.getHasDate()))
                     .append(mActivity.getResources().getString(R.string.ishas_true_time))
-                    .append(mDetailInformation.getNumber())
+                    .append(haveLp.getNumber())
                     .append(mActivity.getResources().getString(R.string.ishas_true_number))
                     .append(ConstantInformation.MILK -
-                            TimeTool.getDays(new Date(), mDetailInformation.getHasDate()))
+                            TimeTool.getDays(new Date(), haveLp.getHasDate()))
                     .append(mActivity.getResources().getString(R.string.ishas_true_nomilk_time));
             mNoMillkBn.setVisibility(View.VISIBLE);
         }else if(mDetailInformation.isMating()){
@@ -117,4 +137,6 @@ public class DisplayFragment extends Fragment {
         displayFragment.setArguments(bundle);
         return displayFragment;
     }
+
+
 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.di.tang.constant.ConstantInformation;
 import com.di.tang.data.DataList;
 import com.di.tang.data.DetailInformation;
+import com.di.tang.data.HaveLp;
 import com.di.tang.privateproject.R;
 import com.di.tang.seconddetail.activity.DetailActivity;
 import com.di.tang.tools.TimeTool;
@@ -48,12 +49,15 @@ public class IndivListFragment extends ListFragment{
 
             addressText.setText(detailInformation.getAddress());
             titleText1.setText(R.string.detail_item_address);
-            if(detailInformation.ishas()){
+            if(detailInformation.isHave()){
+                HaveLp haveLp = detailInformation.getmDetailLPinformation().
+                        get(detailInformation.getmDetailLPinformation().size() - 1);
                 titleText2.setText(R.string.detail_item_number);
-                numberText.setText(String.valueOf(detailInformation.getNumber()));
+                numberText.setText(String.valueOf(detailInformation.getmDetailLPinformation().
+                        get(detailInformation.getmDetailLPinformation().size() - 1)));
                 inforText.setText(R.string.detail_item_prompt);
                 inforText.setText(String.valueOf(TimeTool.getDays(TimeTool.getNowDate(),
-                        detailInformation.getHasDate())));
+                        haveLp.getHasDate())));
             }else if(detailInformation.isMating()){
                 titleText2.setText(R.string.detail_item_mating);
                 numberText.setText(String.valueOf(detailInformation.getMatingTimes()));

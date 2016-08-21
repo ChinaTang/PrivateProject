@@ -14,10 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.di.tang.data.DataList;
 import com.di.tang.data.DetailInformation;
 import com.di.tang.data.FindDataInterface;
 import com.di.tang.dialog.DateDialogFragment;
 import com.di.tang.privateproject.R;
+import com.di.tang.seconddetail.activity.DetailActivity;
 import com.di.tang.tools.TimeTool;
 
 import java.util.Date;
@@ -35,6 +37,8 @@ public class IsPregnantFragment extends Fragment {
     @Override
     public void onCreate(Bundle saveInstanceBundle){
         super.onCreate(saveInstanceBundle);
+        mDetailInformation = DataList.getmDetailInformations().
+                get(getArguments().getInt(DetailActivity.INFORMATION));
     }
 
     @Override
@@ -46,7 +50,7 @@ public class IsPregnantFragment extends Fragment {
         textView.setText(getActivity().getResources().getText(R.string.ispregnant));
         mEditText.setVisibility(View.INVISIBLE);
 
-        if(mDetailInformation.getHasDate() == null){
+        if(mDetailInformation.getPregnantDate() == null){
             mButton.setText(TimeTool.DateToYYMMDD(new Date()));
         }else{
             mButton.setText(TimeTool.DateToYYMMDD(mDetailInformation.getPregnantDate()));
@@ -54,7 +58,7 @@ public class IsPregnantFragment extends Fragment {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mDetailInformation.getHasDate() == null){
+                if(mDetailInformation.getPregnantDate() == null){
                     mDateDialogFragment = DateDialogFragment.getInstance(new Date());
                 }else{
                     mDateDialogFragment = DateDialogFragment.getInstance(mDetailInformation.getPregnantDate());
@@ -79,9 +83,9 @@ public class IsPregnantFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 if(editable.toString().equals("")){
-                    mDetailInformation.setNumber(0);
+                    //mDetailInformation.(0);
                 }else{
-                    mDetailInformation.setNumber(Integer.valueOf(editable.toString()));
+                    //mDetailInformation.setNumber(Integer.valueOf(editable.toString()));
                 }
             }
         });
@@ -104,5 +108,11 @@ public class IsPregnantFragment extends Fragment {
             mDetailInformation.setPregnantDate(date);
             mButton.setText(TimeTool.DateToYYMMDD(mDetailInformation.getPregnantDate()));
         }
+    }
+
+    public static IsPregnantFragment getInstance(Bundle bundle){
+        IsPregnantFragment isPregnantFragment = new IsPregnantFragment();
+        isPregnantFragment.setArguments(bundle);
+        return isPregnantFragment;
     }
 }

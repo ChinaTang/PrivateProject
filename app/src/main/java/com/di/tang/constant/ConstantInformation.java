@@ -76,6 +76,8 @@ public class ConstantInformation {
     public static final String CASTRATEDDAY = "CASTRATEDDAY";
 
     //Data save to disk
-    public static final String FILENAME = "farmers.json";
+    public static final String BPFILENAME = "bigpig_file.json";
+
+    public static final String LPFILENAME = "littlepig_file.json";
 
 }
