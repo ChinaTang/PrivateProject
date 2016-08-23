@@ -46,7 +46,8 @@ public class DataSaveFile {
 
     public static DataSaveFile getInstance(Context context){
         if(dataSaveFile == null){
-            return new DataSaveFile(context);
+            dataSaveFile = new DataSaveFile(context);
+            return dataSaveFile;
         }
         return dataSaveFile;
     }

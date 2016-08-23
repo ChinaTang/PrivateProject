@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageButton;
 
 import com.di.tang.data.DataList;
@@ -15,6 +16,7 @@ import com.di.tang.firstboundary.fragment.IndivListFragment;
 import com.di.tang.firstboundary.fragment.IndivListLPFragment;
 import com.di.tang.firstboundary.fragment.WaringFragment;
 import com.di.tang.privateproject.R;
+import com.di.tang.tools.ReadDataToDisk;
 import com.di.tang.tools.TimeTool;
 
 import java.util.Date;
@@ -25,10 +27,14 @@ import java.util.Date;
 public class MainInterfaceActivity extends FragmentActivity implements
         AddressFragment.NotifyChange{
 
+    private static final String TAG = "MainInterfaceActivity";
+
     private ViewPager mViewPage;
     private FragmentManager mFragmentManager;
     private ImageButton top_bn01, top_bn02, bottom_deatil, bottom_mony,
             bottom_circle, bottom_myself;
+
+    private ReadDataToDisk readDataToDisk;
 
     private FragmentStatePagerAdapter mFragmentStatePagerAdapter;
     @Override
@@ -36,6 +42,13 @@ public class MainInterfaceActivity extends FragmentActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TimeTool.setNowDate(new Date());
+        readDataToDisk = ReadDataToDisk.getInstance(MainInterfaceActivity.this);
+        try{
+            readDataToDisk.ReadBPData();
+            readDataToDisk.ReadLPData();
+        }catch (Exception e){
+            Log.e(TAG, "onCreate: " + e.toString());
+        }
 
         top_bn01 = (ImageButton)findViewById(R.id.activity_main_return);
         top_bn02 = (ImageButton)findViewById(R.id.activity_main_landing);

@@ -124,6 +124,7 @@ public class AddressFragment extends DialogFragment{
         try{
             dataSaveFile.SaveDataDP();
             dataSaveFile.SvaeDataLP();
+            Log.d(TAG, "onPause: save File Success");
         }catch(Exception e){
             Log.e(TAG, "onPause: " + "Save File Failure" + e.toString());
         }
