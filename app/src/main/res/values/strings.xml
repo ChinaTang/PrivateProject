@@ -56,4 +56,8 @@
     <string name="nomilkdetail">断奶，</string>
     <string name="castratedetail">完成阉割</string>
     <string name="nocastratedetail">未完成阉割</string>
+
+    <string name="edit">编        辑</string>
+    <string name="add">新        增</string>
+    <string name="ensur">完     成</string>
 </resources>

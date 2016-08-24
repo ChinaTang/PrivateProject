@@ -72,10 +72,24 @@ public class AddressFragment extends DialogFragment{
                     DataList.getmDetailLPinformation().add(mDetailLPinformation);
                     IsNoMilk isNoMilk = (IsNoMilk)getTargetFragment();
                     isNoMilk.setIsHave();
+                    try{
+                        dataSaveFile.SaveDataDP();
+                        dataSaveFile.SvaeDataLP();
+                        Log.d(TAG, "onPause: save File Success");
+                    }catch(Exception e){
+                        Log.e(TAG, "onPause: " + "Save File Failure" + e.toString());
+                    }
                 }else{
                     mDetailInformation = new DetailInformation(mAddress.getText().toString());
                     mDetailInformation.setEmpty(true);
                     DataList.getmDetailInformations().add(mDetailInformation);
+                    try{
+                        dataSaveFile.SaveDataDP();
+                        dataSaveFile.SvaeDataLP();
+                        Log.d(TAG, "onPause: save File Success");
+                    }catch(Exception e){
+                        Log.e(TAG, "onPause: " + "Save File Failure" + e.toString());
+                    }
                 }
                 notifyChange.notifyChange();
                 getActivity().getSupportFragmentManager()
@@ -121,13 +135,6 @@ public class AddressFragment extends DialogFragment{
     @Override
     public void onPause() {
         super.onPause();
-        try{
-            dataSaveFile.SaveDataDP();
-            dataSaveFile.SvaeDataLP();
-            Log.d(TAG, "onPause: save File Success");
-        }catch(Exception e){
-            Log.e(TAG, "onPause: " + "Save File Failure" + e.toString());
-        }
     }
 
     @Override

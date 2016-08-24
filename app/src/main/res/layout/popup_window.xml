@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ams">
+    <Button android:id="@+id/popup_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:text="@string/edit"
+        android:textColor="@color/colorwrite"
+        android:background="@drawable/select_popuwindow"/>
+    <Button android:id="@+id/popup_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/add"
+        android:textColor="@color/colorwrite"
+        android:background="@drawable/select_popuwindow"/>
+
+
+</LinearLayout>

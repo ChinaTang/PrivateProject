@@ -145,7 +145,7 @@ public class DetailLPinformation {
             packData.put(ConstantInformation.CASTRATEDDAY, castratedDay.getTime());
         }
         if(image == null){
-            packData.put(ConstantInformation.IMAGEURI, null);
+            packData.put(ConstantInformation.IMAGEURI, "");
         }else{
             packData.put(ConstantInformation.IMAGEURI, image.toString());
         }
@@ -169,7 +169,7 @@ public class DetailLPinformation {
         if(jsonObject.getLong(ConstantInformation.CASTRATEDDAY) != 0){
             castratedDay = new Date(jsonObject.getLong(ConstantInformation.CASTRATEDDAY));
         }
-        if(jsonObject.getString(ConstantInformation.IMAGEURI) == null){
+        if(jsonObject.getString(ConstantInformation.IMAGEURI) == ""){
             image = null;
         }else{
             image = URI.create(jsonObject.getString(ConstantInformation.IMAGEURI));

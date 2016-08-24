@@ -44,4 +44,6 @@ public class ToolAdapter<T> extends BaseAdapter{
         view = mSelfView.selfView(i, view, viewGroup);
         return view;
     }
+
+
 }

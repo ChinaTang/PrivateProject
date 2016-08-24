@@ -64,6 +64,7 @@ public class DataSaveFile {
             writer.write(array.toString());
         }finally {
             if(writer != null){
+                writer.close();
                 writer = null;
             }
         }
@@ -81,6 +82,7 @@ public class DataSaveFile {
             writer.write(array.toString());
         } finally {
             if (writer != null) {
+                writer.close();
                 writer = null;
             }
         }
@@ -104,6 +106,7 @@ public class DataSaveFile {
             Log.e(TAG, "ReadDataLP: NO SUCH FILE");
         } finally {
             if(read != null){
+                read.close();
                 read = null;
             }
         }
@@ -127,6 +130,7 @@ public class DataSaveFile {
             Log.e(TAG, "ReadDataLP: NO SUCH FILE");
         } finally {
             if(read != null){
+                read.close();
                 read = null;
             }
         }

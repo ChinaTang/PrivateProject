@@ -151,7 +151,7 @@ public class DetailInformation {
         packData.put(ConstantInformation.ISEMPTY, isEmpty);
         packData.put(ConstantInformation.ADDRESS, address);
         if(Imageuri == null){
-            packData.put(ConstantInformation.IMAGEURI, null);
+            packData.put(ConstantInformation.IMAGEURI, "");
         }else{
             packData.put(ConstantInformation.IMAGEURI, Imageuri.toString());
         }
@@ -193,7 +193,11 @@ public class DetailInformation {
         uuid = UUID.fromString(jsonObject.getString(ConstantInformation._UUID));
         isEmpty = jsonObject.getBoolean(ConstantInformation.ISEMPTY);
         address = jsonObject.getString(ConstantInformation.ADDRESS);
-        Imageuri = URI.create(jsonObject.getString(ConstantInformation.IMAGEURI));
+        if(jsonObject.getString(ConstantInformation.IMAGEURI) == ""){
+            Imageuri = null;
+        }else{
+            Imageuri = URI.create(jsonObject.getString(ConstantInformation.IMAGEURI));
+        }
         isMating = jsonObject.getBoolean(ConstantInformation.ISMATING);
         matingTimes = jsonObject.getInt(ConstantInformation.MATINGTIMES);
         if(jsonObject.getLong(ConstantInformation.MATINGDATE) != 0){
