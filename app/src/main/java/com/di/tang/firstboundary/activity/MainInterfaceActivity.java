@@ -136,8 +136,8 @@ public class MainInterfaceActivity extends FragmentActivity implements
         final PopupWindow popupWindow = new PopupWindow();
         View view = MainInterfaceActivity.this.getLayoutInflater()
                 .inflate(R.layout.popup_window, null);
-        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        popupWindow.setWidth(150);
+        popupWindow.setHeight(300);
+        popupWindow.setWidth(200);
         popupWindow.setFocusable(true);
         popupWindow.setContentView(view);
         if(!popupWindow.isShowing()){
