@@ -36,6 +36,7 @@ public class AddressFragment extends DialogFragment{
         void setIsHave();
     }
     public static final String _INFORTMATION = "islp";
+    public static final String _LPNUMBER = "index";
     private NotifyChange notifyChange;
     private EditText mAddress;
     private Button bn01;
@@ -68,6 +69,7 @@ public class AddressFragment extends DialogFragment{
                 if(isLp){
                     mDetailLPinformation = new DetailLPinformation();
                     mDetailLPinformation.setEmpty(true);
+                    mDetailLPinformation.setNumber(getArguments().getInt(_LPNUMBER));
                     mDetailLPinformation.setAddress(mAddress.getText().toString());
                     DataList.getmDetailLPinformation().add(mDetailLPinformation);
                     IsNoMilk isNoMilk = (IsNoMilk)getTargetFragment();

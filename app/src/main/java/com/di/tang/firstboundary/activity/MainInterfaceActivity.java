@@ -122,6 +122,15 @@ public class MainInterfaceActivity extends FragmentActivity implements
     @Override
     public void onResume(){
         super.onResume();
+        DataList.getmDetailInformations().clear();
+        DataList.getmDetailLPinformation().clear();
+        try{
+            readDataToDisk.ReadBPData();
+            readDataToDisk.ReadLPData();
+        }catch (Exception e){
+            Log.e(TAG, "onCreate: " + e.toString());
+        }
+        mFragmentStatePagerAdapter.notifyDataSetChanged();
         TimeTool.setNowDate(new Date());
     }
 

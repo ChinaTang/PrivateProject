@@ -72,6 +72,9 @@ public class DisplayFragment extends Fragment implements AddressFragment.IsNoMil
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putBoolean(AddressFragment._INFORTMATION, true);
+                bundle.putInt(AddressFragment._LPNUMBER,
+                        mDetailInformation.getmDetailLPinformation().
+                                get(mDetailInformation.getmDetailLPinformation().size() - 1).getNumber());
                 AddressFragment addressFragment = AddressFragment.getInstance(bundle);
                 addressFragment.setTargetFragment(DisplayFragment.this, QUEST_CODE);
                 addressFragment.show(fm, ConstantInformation.ADDRESS_DIALOG);
@@ -93,7 +96,7 @@ public class DisplayFragment extends Fragment implements AddressFragment.IsNoMil
                     .append(haveLp.getNumber())
                     .append(mActivity.getResources().getString(R.string.ishas_true_number))
                     .append(ConstantInformation.MILK -
-                            TimeTool.getDays(new Date(), haveLp.getHasDate()))
+                            TimeTool.getDays(haveLp.getHasDate(), new Date()))
                     .append(mActivity.getResources().getString(R.string.ishas_true_nomilk_time));
             mNoMillkBn.setVisibility(View.VISIBLE);
         }else if(mDetailInformation.isMating()){

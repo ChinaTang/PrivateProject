@@ -80,22 +80,22 @@ public class IndivListFragment extends ListFragment implements
                         get(detailInformation.getmDetailLPinformation().size() - 1);
                 titleText2.setText(R.string.detail_item_number);
                 numberText.setText(String.valueOf(detailInformation.getmDetailLPinformation().
-                        get(detailInformation.getmDetailLPinformation().size() - 1)));
+                        get(detailInformation.getmDetailLPinformation().size() - 1).getNumber()));
                 inforText.setText(R.string.detail_item_prompt);
-                inforText.setText(String.valueOf(TimeTool.getDays(TimeTool.getNowDate(),
-                        haveLp.getHasDate())));
+                infordetail.setText(String.valueOf(TimeTool.getDays(haveLp.getHasDate(),
+                        TimeTool.getNowDate())));
             }else if(detailInformation.isMating()){
                 titleText2.setText(R.string.detail_item_mating);
                 numberText.setText(String.valueOf(detailInformation.getMatingTimes()));
                 inforText.setText(R.string.detail_item_mating_days);
-                inforText.setText(String.valueOf(TimeTool.getDays(TimeTool.getNowDate(),
-                        detailInformation.getMatingDate())));
+                infordetail.setText(String.valueOf(TimeTool.getDays(detailInformation.getMatingDate(),
+                        TimeTool.getNowDate())));
             }else if(detailInformation.isPregnant()){
                 titleText2.setText(R.string.detail_item_pregnant);
                 numberText.setText(detailInformation.getPregnantDate().toString());
                 inforText.setText(R.string.detail_item_pregnant_days);
-                inforText.setText(String.valueOf(TimeTool.getDays(TimeTool.getNowDate(),
-                        detailInformation.getPregnantDate())));
+                infordetail.setText(String.valueOf(TimeTool.getDays(detailInformation.getPregnantDate(),
+                        TimeTool.getNowDate())));
             }
             return view;
         }

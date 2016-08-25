@@ -26,12 +26,17 @@ public class EditFragment extends Fragment{
     public interface EditFragmentChange{
         void EditChangeButton();
     }
+
+    public interface ChangeActivityTitle{
+        void changeTitle();
+    }
     private EditFragmentChange mEditFragmentChange;
     private EditText mEditText;
     private ViewPager mViewPage;
     private DetailInformation mDetailInformation;
     private FragmentManager mFragmentManager;
     private Bundle bundle;
+    private ChangeActivityTitle changeActivityTitle;
 
     @Override
     public void onCreate(Bundle saveInstanceBundle){
@@ -68,7 +73,7 @@ public class EditFragment extends Fragment{
                 }else{
                     mDetailInformation.setAddress(editable.toString());
                 }
-
+                changeActivityTitle.changeTitle();
             }
         });
         mViewPage.setAdapter(new FragmentStatePagerAdapter(mFragmentManager) {
@@ -102,5 +107,6 @@ public class EditFragment extends Fragment{
     public void onAttach(Context context){
         super.onAttach(context);
         mEditFragmentChange = (EditFragmentChange)context;
+        changeActivityTitle = (ChangeActivityTitle)context;
     }
 }

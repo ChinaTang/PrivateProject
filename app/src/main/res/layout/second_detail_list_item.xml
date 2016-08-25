@@ -21,6 +21,17 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="5dp"/>
+        <Button
+            android:id="@+id/second_detail_list_item_savebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:background="@color/transparent"
+            android:visibility="gone"
+            android:text="@string/ensur"
+            />
 
         <TextView
             android:id="@+id/second_detail_list_item_address"

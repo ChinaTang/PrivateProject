@@ -47,6 +47,9 @@ public class DetailInformation {
     public DetailInformation(String address){
         uuid = UUID.randomUUID();
         this.address = address;
+        mDetailLPinformation = new ArrayList<HaveLp>();
+        matingDate = new Date();
+        pregnantDate = new Date();
     }
 
     public String getAddress() {
@@ -155,6 +158,7 @@ public class DetailInformation {
         }else{
             packData.put(ConstantInformation.IMAGEURI, Imageuri.toString());
         }
+        packData.put(ConstantInformation.ISHAS, isHave);
         packData.put(ConstantInformation.ISMATING, isMating);
         packData.put(ConstantInformation.MATINGTIMES, matingTimes);
         if(matingDate == null){
@@ -207,6 +211,7 @@ public class DetailInformation {
         if(jsonObject.getLong(ConstantInformation.PREGNANTDATE) != 0){
             pregnantDate = new Date(jsonObject.getLong(ConstantInformation.PREGNANTDATE));
         }
+        isHave = jsonObject.getBoolean(ConstantInformation.ISHAS);
         pregnantDays = jsonObject.getInt(ConstantInformation.PREGNANTDAYS);
         JSONToHaveLp(jsonObject.getJSONArray(ConstantInformation.HAVELPLIST));
 

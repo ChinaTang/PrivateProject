@@ -33,7 +33,7 @@ import java.util.Date;
  */
 public class IsHasFragment extends Fragment{
     private EditText mEditText;
-    private Button mButton;
+    private Button mButton, addnewHas;
     private TextView textView;
     private DetailInformation detailInformation;
     private HaveLp mDetailInformation;
@@ -58,6 +58,8 @@ public class IsHasFragment extends Fragment{
         mEditText = (EditText)view.findViewById(R.id.ishas_fragment_edit);
         mButton = (Button)view.findViewById(R.id.ishas_fragment_button);
         textView = (TextView)view.findViewById(R.id.ishas_fragment_title);
+        addnewHas = (Button)view.findViewById(R.id.ishas_fragment_add);
+        addnewHas.setVisibility(View.VISIBLE);
         textView.setText(getActivity().getResources().getText(R.string.ishas));
 
         if(mDetailInformation.getHasDate() == null){
@@ -97,6 +99,16 @@ public class IsHasFragment extends Fragment{
                 }else{
                     mDetailInformation.setNumber(Integer.valueOf(editable.toString()));
                 }
+            }
+        });
+
+        addnewHas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                detailInformation.getmDetailLPinformation().add(mDetailInformation);
+                detailInformation.setIsHave(true);
+                detailInformation.setMating(false);
+                detailInformation.setPregnant(false);
             }
         });
         return view;

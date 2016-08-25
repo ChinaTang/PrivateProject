@@ -50,5 +50,7 @@ public class HaveLp {
         }
     }
 
-    public HaveLp(){}
+    public HaveLp(){
+        hasDate = new Date();
+    }
 }

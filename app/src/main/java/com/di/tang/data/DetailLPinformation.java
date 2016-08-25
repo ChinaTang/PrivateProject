@@ -23,7 +23,7 @@ public class DetailLPinformation {
     private int sellNumber;
     private Date sellDay;
 
-    private boolean isCastrate;
+    private boolean isCastrate = false;
     private Date castratedDay;
 
     private URI image;
@@ -101,6 +101,9 @@ public class DetailLPinformation {
     }
     public DetailLPinformation(){
         this.uuid = UUID.randomUUID();
+        noMilkDay = new Date();
+        sellDay = new Date();
+        castratedDay = new Date();
     }
 
     public boolean isCastrate() {

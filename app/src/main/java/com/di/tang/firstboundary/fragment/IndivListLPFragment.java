@@ -48,7 +48,7 @@ public class IndivListLPFragment extends ListFragment {
             titleText2.setText(R.string.nomilkDay);
             noMilkDay.setText(TimeTool.DateToYYMMDD(detailLPinformation.getNoMilkDay()));
             inforText.setText(R.string.castrateDay);
-            if(detailLPinformation.getCastratedDay() == null){
+            if(detailLPinformation.isCastrate()){
                 infordetail.setText(R.string.nocastrate);
             }else{
                 infordetail.setText(TimeTool.DateToYYMMDD(detailLPinformation.getCastratedDay()));
@@ -71,5 +71,4 @@ public class IndivListLPFragment extends ListFragment {
         intent.putExtra(ConstantInformation.LPORBFLAG, 1);
         getActivity().startActivity(intent);
     }
-
 }

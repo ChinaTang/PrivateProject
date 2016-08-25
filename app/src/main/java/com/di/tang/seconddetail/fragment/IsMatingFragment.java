@@ -29,7 +29,7 @@ import java.util.Date;
  */
 public class IsMatingFragment extends Fragment {
     private EditText mEditText;
-    private Button mButton;
+    private Button mButton, mEnsure;
     private TextView textView;
     private DetailInformation mDetailInformation;
     private DateDialogFragment mDateDialogFragment;
@@ -49,12 +49,24 @@ public class IsMatingFragment extends Fragment {
         textView = (TextView)view.findViewById(R.id.ishas_fragment_title);
         textView.setText(getActivity().getResources().getText(R.string.ismating));
         mEditText.setText(String.valueOf(mDetailInformation.getMatingTimes()));
+        mEnsure = (Button)view.findViewById(R.id.ishas_fragment_add);
+        mEnsure.setVisibility(View.VISIBLE);
 
         if(mDetailInformation.getMatingDate() == null){
             mButton.setText(TimeTool.DateToYYMMDD(new Date()));
         }else{
             mButton.setText(TimeTool.DateToYYMMDD(mDetailInformation.getMatingDate()));
         }
+
+        mEnsure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDetailInformation.setMating(true);
+                mDetailInformation.setPregnant(false);
+                mDetailInformation.setIsHave(false);
+            }
+        });
+
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

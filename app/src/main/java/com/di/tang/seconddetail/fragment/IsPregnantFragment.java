@@ -29,7 +29,7 @@ import java.util.Date;
  */
 public class IsPregnantFragment extends Fragment {
     private EditText mEditText;
-    private Button mButton;
+    private Button mButton, mEnsure;
     private TextView textView;
     private DetailInformation mDetailInformation;
     private DateDialogFragment mDateDialogFragment;
@@ -48,13 +48,24 @@ public class IsPregnantFragment extends Fragment {
         mButton = (Button)view.findViewById(R.id.ishas_fragment_button);
         textView = (TextView)view.findViewById(R.id.ishas_fragment_title);
         textView.setText(getActivity().getResources().getText(R.string.ispregnant));
-        mEditText.setVisibility(View.INVISIBLE);
+        mEnsure = (Button)view.findViewById(R.id.ishas_fragment_add);
+        mEnsure.setVisibility(View.INVISIBLE);
 
         if(mDetailInformation.getPregnantDate() == null){
             mButton.setText(TimeTool.DateToYYMMDD(new Date()));
         }else{
             mButton.setText(TimeTool.DateToYYMMDD(mDetailInformation.getPregnantDate()));
         }
+
+        mEnsure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDetailInformation.setMating(false);
+                mDetailInformation.setPregnant(true);
+                mDetailInformation.setIsHave(false);
+            }
+        });
+
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
